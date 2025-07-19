@@ -1,0 +1,480 @@
+page {
+  background: var(--bg-primary) !important;
+}
+
+/* 首页样式 - 白底设计 */
+
+.index-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding-bottom: 120rpx;
+}
+
+/* 顶部问候区域 */
+.greeting-section {
+  padding: 20rpx 32rpx 10rpx;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background: transparent;
+}
+
+.user-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.user-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4rpx;
+}
+
+.user-level {
+  font-size: 22rpx;
+  color: white;
+  background: var(--gradient-secondary);
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 8rpx rgba(255, 138, 101, 0.3);
+}
+
+/* AI情感导师区域 */
+.ai-mentor-section {
+  padding: 24rpx 32rpx 16rpx;
+}
+
+.ai-mentor-section .section-header {
+  padding: 0 0 20rpx 0;
+}
+
+.ai-mentor-card {
+  background: linear-gradient(135deg, #F8F7FC 0%, #E8E5F0 100%);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(45, 27, 105, 0.08);
+  border-radius: var(--radius-lg);
+  border: 1rpx solid rgba(102, 126, 234, 0.1);
+  padding: 32rpx;
+  z-index: 1;
+}
+
+.ai-mentor-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(102, 126, 234, 0.05) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.mentor-content {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.mentor-avatar {
+  margin-right: 24rpx;
+}
+
+.mentor-info {
+  flex: 1;
+}
+
+.mentor-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8rpx;
+}
+
+.mentor-subtitle {
+  font-size: 24rpx;
+  color: #667EEA;
+  margin-bottom: 8rpx;
+}
+
+.mentor-desc {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.mentor-arrow {
+  font-size: 32rpx;
+  color: #667EEA;
+  margin-left: 16rpx;
+}
+
+/* 区域标题 */
+.section-header {
+  padding: 20rpx 32rpx 32rpx;
+  text-align: left;
+}
+
+.section-title {
+  display: block;
+  font-size: 42rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12rpx;
+}
+
+.section-subtitle {
+  display: block;
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+/* 疗愈卡片区域 */
+.healing-section {
+  margin-bottom: 32rpx;
+}
+
+.healing-cards {
+  white-space: nowrap;
+  padding: 0 32rpx;
+  height: 780rpx;
+}
+
+.healing-cards::-webkit-scrollbar {
+  display: none;
+}
+
+.card-container {
+  display: inline-flex;
+  gap: 20rpx;
+  padding-right: 32rpx;
+}
+
+.healing-card {
+  width: 560rpx;
+  height: 0;
+  padding-bottom: 746rpx; /* 560 * 4/3 = 746，保持3:4比例，放大一倍 */
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+  box-shadow: 0 8rpx 32rpx rgba(45, 27, 105, 0.15);
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, 
+    rgba(0, 0, 0, 0) 0%, 
+    rgba(0, 0, 0, 0.1) 20%, 
+    rgba(0, 0, 0, 0.4) 60%, 
+    rgba(0, 0, 0, 0.7) 100%);
+  padding: 60rpx 32rpx 36rpx;
+}
+
+.card-content {
+  color: white;
+}
+
+.card-title {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+  line-height: 1.3;
+}
+
+.card-desc {
+  display: block;
+  font-size: 26rpx;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+/* 活动区域 */
+.activity-section {
+  margin-bottom: 32rpx;
+  margin-top: 8rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 32rpx 32rpx;
+  text-align: left;
+}
+
+.more-btn {
+  font-size: 28rpx;
+  color: var(--warm-color);
+  font-weight: 500;
+}
+
+.activity-list {
+  padding: 0 32rpx;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: var(--card-shadow);
+  border: 1rpx solid var(--card-border);
+  transition: all 0.2s ease;
+}
+
+.activity-item:active {
+  transform: scale(0.98);
+  box-shadow: var(--shadow-md);
+}
+
+.activity-item:last-child {
+  margin-bottom: 0;
+}
+
+.activity-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: var(--radius-md);
+  margin-right: 20rpx;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.activity-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12rpx;
+  line-height: 1.3;
+}
+
+.activity-meta {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 8rpx;
+}
+
+.activity-time,
+.activity-location {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+}
+
+.meta-icon {
+  font-size: 22rpx;
+}
+
+.meta-text {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+.activity-participants {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+/* 剧本推荐区域 */
+.script-section {
+  margin-bottom: 32rpx;
+}
+
+.script-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+  padding: 0 32rpx;
+}
+
+.script-item {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  border: 1rpx solid var(--card-border);
+  transition: all 0.2s ease;
+}
+
+.script-item:active {
+  transform: scale(0.98);
+  box-shadow: var(--shadow-md);
+}
+
+.script-image {
+  width: 100%;
+  height: 200rpx;
+  object-fit: cover;
+}
+
+.script-content {
+  padding: 20rpx;
+}
+
+.script-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8rpx;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.script-desc {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 12rpx;
+}
+
+.script-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 22rpx;
+}
+
+.script-rating {
+  color: var(--warm-color);
+}
+
+.script-count {
+  color: var(--text-muted);
+}
+
+/* 快速访问区域 */
+.quick-access {
+  padding: 0 32rpx 32rpx;
+}
+
+.quick-access-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20rpx;
+}
+
+.quick-access-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24rpx 16rpx;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  border: 1rpx solid var(--card-border);
+  transition: all 0.2s ease;
+}
+
+.quick-access-item:active {
+  transform: scale(0.95);
+  box-shadow: var(--shadow-md);
+}
+
+.quick-access-icon {
+  width: 60rpx;
+  height: 60rpx;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12rpx;
+  font-size: 30rpx;
+  color: white;
+}
+
+.quick-access-text {
+  font-size: 24rpx;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* 底部安全区域 */
+.safe-area-bottom {
+  height: env(safe-area-inset-bottom);
+  background: var(--bg-primary);
+}
+
+/* 动画效果 */
+.healing-card,
+.activity-item,
+.ai-mentor-card {
+  animation: slideUp 0.6s ease-out;
+}
+
+.healing-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.activity-item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.activity-item:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .hero-section {
+    padding: 48rpx 24rpx 36rpx;
+  }
+  
+  .logo-text {
+    font-size: 64rpx;
+  }
+  
+  .slogan-text {
+    font-size: 42rpx;
+  }
+  
+  .healing-cards {
+    flex-direction: column;
+  }
+  
+  .healing-card {
+    height: 280rpx;
+  }
+  
+  .activity-content {
+    flex-direction: column;
+    gap: 16rpx;
+  }
+  
+  .activity-image {
+    width: 100%;
+    height: 160rpx;
+  }
+} 

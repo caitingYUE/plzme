@@ -1,0 +1,266 @@
+/* 加载兜底页面组件 - 白色底设计 */
+
+.loading-fallback {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* 背景装饰 */
+.fallback-bg-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.fallback-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.05;
+  animation: fallbackFloat 10s ease-in-out infinite;
+}
+
+.fallback-circle-1 {
+  width: 200rpx;
+  height: 200rpx;
+  background: #667EEA;
+  top: 10%;
+  left: -80rpx;
+  animation-delay: 0s;
+}
+
+.fallback-circle-2 {
+  width: 150rpx;
+  height: 150rpx;
+  background: #764BA2;
+  top: 60%;
+  right: -60rpx;
+  animation-delay: 3s;
+}
+
+.fallback-circle-3 {
+  width: 100rpx;
+  height: 100rpx;
+  background: #2D1B69;
+  top: 80%;
+  left: 20%;
+  animation-delay: 6s;
+}
+
+@keyframes fallbackFloat {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg) scale(1);
+    opacity: 0.05;
+  }
+  50% { 
+    transform: translateY(-20px) rotate(180deg) scale(1.1);
+    opacity: 0.08;
+  }
+}
+
+/* 主要内容 */
+.fallback-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 60rpx 40rpx;
+  width: 100%;
+  max-width: 600rpx;
+}
+
+/* Logo区域 */
+.fallback-logo-section {
+  margin-bottom: 100rpx;
+}
+
+.fallback-logo {
+  font-size: 72rpx;
+  font-weight: 900;
+  color: #2D1B69;
+  display: block;
+  margin-bottom: 20rpx;
+  letter-spacing: 4rpx;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.fallback-subtitle {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #6B7280;
+  display: block;
+  letter-spacing: 1rpx;
+}
+
+/* 加载动画区域 */
+.fallback-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60rpx;
+}
+
+/* 8点加载动画 */
+.fallback-spinner {
+  position: relative;
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 40rpx;
+}
+
+.fallback-dot {
+  position: absolute;
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: #667EEA;
+  animation: fallbackSpin 1.2s linear infinite;
+}
+
+.fallback-dot:nth-child(1) {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 0s;
+}
+
+.fallback-dot:nth-child(2) {
+  top: 15%;
+  right: 15%;
+  animation-delay: 0.15s;
+}
+
+.fallback-dot:nth-child(3) {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  animation-delay: 0.3s;
+}
+
+.fallback-dot:nth-child(4) {
+  bottom: 15%;
+  right: 15%;
+  animation-delay: 0.45s;
+}
+
+.fallback-dot:nth-child(5) {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 0.6s;
+}
+
+.fallback-dot:nth-child(6) {
+  bottom: 15%;
+  left: 15%;
+  animation-delay: 0.75s;
+}
+
+.fallback-dot:nth-child(7) {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  animation-delay: 0.9s;
+}
+
+.fallback-dot:nth-child(8) {
+  top: 15%;
+  left: 15%;
+  animation-delay: 1.05s;
+}
+
+@keyframes fallbackSpin {
+  0%, 39%, 100% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.fallback-loading-text {
+  font-size: 28rpx;
+  color: #9CA3AF;
+  text-align: center;
+  line-height: 1.5;
+  animation: fallbackTextPulse 2s ease-in-out infinite;
+}
+
+@keyframes fallbackTextPulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* 进度条 */
+.fallback-progress {
+  width: 100%;
+  max-width: 400rpx;
+  margin-bottom: 40rpx;
+}
+
+.fallback-progress-bar {
+  width: 100%;
+  height: 8rpx;
+  background: #F3F4F6;
+  border-radius: 4rpx;
+  overflow: hidden;
+  margin-bottom: 16rpx;
+}
+
+.fallback-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667EEA 0%, #764BA2 100%);
+  border-radius: 4rpx;
+  transition: width 0.3s ease;
+  animation: fallbackProgressShine 2s ease-in-out infinite;
+}
+
+@keyframes fallbackProgressShine {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+.fallback-progress-text {
+  font-size: 24rpx;
+  color: #9CA3AF;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+/* 底部提示 */
+.fallback-footer {
+  position: absolute;
+  bottom: 60rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 2;
+}
+
+.fallback-tip {
+  font-size: 24rpx;
+  color: #D1D5DB;
+  animation: fallbackTipFade 3s ease-in-out infinite;
+}
+
+@keyframes fallbackTipFade {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+} 

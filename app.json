@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/launch/launch",
+    "pages/index/index",
+    "pages/scripts/scripts", 
+    "pages/profile/profile",
+    "pages/chat/chat",
+    "pages/script-detail/script-detail",
+    "pages/create-script/create-script",
+    "pages/custom-scripts/custom-scripts",
+    "pages/activity/activity",
+    "pages/report/report"
+  ],
+  "tabBar": {
+    "custom": false,
+    "color": "#9CA3AF",
+    "selectedColor": "#2D1B69",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/home.png",
+        "selectedIconPath": "assets/home_active.png"
+      },
+      {
+        "pagePath": "pages/scripts/scripts",
+        "text": "剧本",
+        "iconPath": "assets/script.png", 
+        "selectedIconPath": "assets/script_active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "assets/user.png",
+        "selectedIconPath": "assets/user_active.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "PlzMe",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FFFFFF"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+} 

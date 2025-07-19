@@ -1,0 +1,93 @@
+<!-- pages/custom-scripts/custom-scripts.wxml -->
+<view class="custom-scripts-page">
+  <!-- 页面头部 -->
+  <view class="page-header">
+    <text class="header-title">我的自定义剧本</text>
+    <text class="header-subtitle">{{customScripts.length}}个专属剧本</text>
+  </view>
+
+  <!-- 剧本列表 -->
+  <view class="scripts-container" wx:if="{{customScripts.length > 0}}">
+    <view 
+      class="script-card"
+      wx:for="{{customScripts}}"
+      wx:key="id"
+      bindtap="goToScriptDetail"
+      data-script="{{item}}"
+    >
+      <view class="script-image-container">
+        <image 
+          class="script-image" 
+          src="{{item.cover}}" 
+          mode="aspectFill"
+          lazy-load
+        />
+        <view class="custom-badge {{item.isDraft ? 'draft' : ''}}">{{item.isDraft ? '草稿' : '自定义'}}</view>
+      </view>
+      
+      <view class="script-info">
+        <view class="script-header">
+          <text class="script-title">{{item.title}}</text>
+          <view class="script-role">{{item.roleText}}</view>
+        </view>
+        
+        <text class="script-description">{{item.description}}</text>
+        
+        <view class="script-tags">
+          <text 
+            class="script-tag"
+            wx:for="{{item.tags}}"
+            wx:for-item="tag"
+            wx:key="*this"
+          >{{tag}}</text>
+        </view>
+        
+        <view class="script-footer">
+          <text class="create-time">创建于 {{item.timeText}}</text>
+          <view class="script-actions">
+            <text class="action-btn" bindtap="editScript" data-script="{{item}}" catchtap="true">{{item.isDraft ? '继续编辑' : '编辑'}}</text>
+            <text class="action-btn delete" bindtap="deleteScript" data-script="{{item}}" catchtap="true">删除</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{customScripts.length === 0 && !loading}}">
+    <view class="empty-icon">🎭</view>
+    <text class="empty-title">还没有自定义剧本</text>
+    <text class="empty-desc">创建你的第一个专属剧本吧</text>
+    <button class="create-first-btn" bindtap="goToCreateScript">
+      ✨ 立即创建
+    </button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 底部浮动创建按钮 -->
+  <view class="floating-create-btn" wx:if="{{customScripts.length > 0}}" bindtap="goToCreateScript">
+    <text class="create-icon">+</text>
+  </view>
+</view>
+
+<!-- 删除确认弹窗 -->
+<view class="delete-modal {{showDeleteModal ? 'show' : ''}}" wx:if="{{showDeleteModal}}">
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">确认删除</text>
+    </view>
+    <view class="modal-body">
+      <text class="modal-text">确定要删除剧本"{{deleteScript.title}}"吗？</text>
+      <text class="modal-warning">删除后无法恢复</text>
+    </view>
+    <view class="modal-footer">
+      <button class="modal-btn cancel" bindtap="cancelDelete">取消</button>
+      <button class="modal-btn confirm" bindtap="confirmDelete">删除</button>
+    </view>
+  </view>
+</view> 

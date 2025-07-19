@@ -1,0 +1,176 @@
+<!-- pages/create-script/create-script.wxml -->
+<view class="create-script-page">
+  <view class="page-header">
+    <text class="page-title">创建你的专属剧本</text>
+    <text class="page-subtitle">描述你想要的故事情节，AI帮你生成完整剧本</text>
+    
+    <!-- 恢复草稿提示 -->
+    <view class="draft-tip" wx:if="{{hasDraft}}">
+      <view class="tip-content">
+        <text class="tip-icon">📝</text>
+        <text class="tip-text">发现未完成的草稿，已为你恢复</text>
+        <text class="tip-action" bindtap="clearDraft">清除</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-container">
+    <!-- 剧情描述 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-title">剧情描述</text>
+        <text class="char-count">{{storyText.length}}/300</text>
+      </view>
+      <textarea 
+        class="story-input"
+        placeholder="描述你想要的故事情节，比如：在咖啡厅偶遇前任，他想要复合但我已经放下了..."
+        value="{{storyText}}"
+        bindinput="onStoryInput"
+        maxlength="300"
+        auto-height
+        show-confirm-bar="{{false}}"
+      ></textarea>
+    </view>
+
+    <!-- 角色类型选择 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-title">角色设定</text>
+      </view>
+      <view class="role-options">
+        <view 
+          class="role-option {{selectedRole === 'female' ? 'selected' : ''}}"
+          bindtap="selectRole"
+          data-role="female"
+        >
+          <view class="role-icon">👩</view>
+          <text class="role-text">女主本</text>
+        </view>
+        <view 
+          class="role-option {{selectedRole === 'male' ? 'selected' : ''}}"
+          bindtap="selectRole"
+          data-role="male"
+        >
+          <view class="role-icon">👨</view>
+          <text class="role-text">男主本</text>
+        </view>
+        <view 
+          class="role-option {{selectedRole === 'double_male' ? 'selected' : ''}}"
+          bindtap="selectRole"
+          data-role="double_male"
+        >
+          <view class="role-icon">👬</view>
+          <text class="role-text">双男主</text>
+        </view>
+        <view 
+          class="role-option {{selectedRole === 'double_female' ? 'selected' : ''}}"
+          bindtap="selectRole"
+          data-role="double_female"
+        >
+          <view class="role-icon">👭</view>
+          <text class="role-text">双女主</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 角色性格特点 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-title">角色性格特点</text>
+        <text class="char-count optional">{{characterTraits.length}}/200 (可选)</text>
+      </view>
+      <textarea 
+        class="character-input"
+        placeholder="描述主角的性格特点，比如：开朗外向、有点小傲娇、工作狂、温柔体贴等（不填写将自动生成）"
+        value="{{characterTraits}}"
+        bindinput="onCharacterInput"
+        maxlength="200"
+        auto-height
+        show-confirm-bar="{{false}}"
+      ></textarea>
+    </view>
+
+    <!-- 头像选择 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-title">主角头像</text>
+      </view>
+      <view class="avatar-options">
+        <view 
+          class="avatar-option {{selectedAvatar === index ? 'selected' : ''}}"
+          wx:for="{{availableAvatars}}"
+          wx:key="index"
+          bindtap="selectAvatar"
+          data-index="{{index}}"
+        >
+          <image class="avatar-preview" src="{{item}}" mode="aspectFill" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 配图上传 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-title">剧本配图</text>
+      </view>
+      <view class="image-upload-area" bindtap="selectImage">
+        <image wx:if="{{scriptImage}}" class="uploaded-image" src="{{scriptImage}}" mode="aspectFill" />
+        <view wx:else class="upload-placeholder">
+          <view class="upload-icon">📷</view>
+          <text class="upload-text">点击上传配图</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮区域 -->
+  <view class="action-section">
+    <!-- 保存草稿按钮 -->
+    <button 
+      class="save-btn {{canSave ? '' : 'disabled'}}"
+      bindtap="saveDraft"
+      disabled="{{!canSave || isGenerating}}"
+    >
+      <text class="btn-icon">💾</text>
+      <text class="btn-text">保存</text>
+    </button>
+    
+    <!-- 生成剧本按钮 -->
+    <button 
+      class="generate-btn {{canGenerate ? '' : 'disabled'}}"
+      bindtap="generateScript"
+      disabled="{{!canGenerate || isGenerating}}"
+    >
+      <text wx:if="{{isGenerating}}">AI正在创作中...</text>
+      <text wx:else>🎭 生成剧本</text>
+    </button>
+  </view>
+
+
+</view>
+
+<!-- 生成进度弹窗 -->
+<view class="progress-modal {{showProgress ? 'show' : ''}}" wx:if="{{isGenerating}}">
+  <view class="progress-content">
+    <view class="progress-header">
+      <text class="progress-title">AI正在为您创作剧本</text>
+    </view>
+    <view class="progress-steps">
+      <view class="progress-step {{progressStep >= 1 ? 'active' : ''}}">
+        <view class="step-icon">📝</view>
+        <text class="step-text">分析剧情内容</text>
+      </view>
+      <view class="progress-step {{progressStep >= 2 ? 'active' : ''}}">
+        <view class="step-icon">🎬</view>
+        <text class="step-text">构建场景框架</text>
+      </view>
+      <view class="progress-step {{progressStep >= 3 ? 'active' : ''}}">
+        <view class="step-icon">✨</view>
+        <text class="step-text">完善剧本细节</text>
+      </view>
+    </view>
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{(progressStep / 3) * 100}}%"></view>
+    </view>
+  </view>
+</view> 

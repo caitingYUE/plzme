@@ -1,0 +1,234 @@
+/* 启动页面容器 */
+.launch-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #fbcab8 0%, #e6b8a6 15%, #d0a394 30%, #9a9bc4 50%, #8a8cc7 70%, #bbb4d2 100%);
+  padding: 40rpx;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 背景装饰 */
+.bg-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.06;
+  animation: float 8s ease-in-out infinite;
+}
+
+.bg-circle-1 {
+  width: 180rpx;
+  height: 180rpx;
+  background: #F4C2A1;
+  top: 15%;
+  left: -50rpx;
+  animation-delay: 0s;
+}
+
+.bg-circle-2 {
+  width: 120rpx;
+  height: 120rpx;
+  background: #F8D4B8;
+  top: 45%;
+  right: -40rpx;
+  animation-delay: 2s;
+}
+
+.bg-circle-3 {
+  width: 80rpx;
+  height: 80rpx;
+  background: #FDE7D3;
+  top: 75%;
+  left: 15%;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+  50% { transform: translateY(-15px) rotate(180deg) scale(1.1); }
+}
+
+/* 主要内容 */
+.launch-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 60rpx 40rpx;
+  width: 100%;
+  max-width: 600rpx;
+}
+
+/* Logo区域 */
+.logo-section {
+  margin-bottom: 120rpx;
+}
+
+/* LOGO - 米粉色霓虹灯效果 */
+.app-logo {
+  font-size: 80rpx;
+  font-weight: 900;
+  color: #FFFFFF;
+  display: block;
+  margin-bottom: 40rpx;
+  animation: logoGlow 3s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 10rpx #F4C2A1, 0 0 20rpx #F4C2A1, 0 0 30rpx #F4C2A1, 0 2rpx 8rpx rgba(244, 194, 161, 0.3);
+  letter-spacing: 4rpx;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+@keyframes logoGlow {
+  0%, 100% { 
+    text-shadow: 0 0 10rpx #F4C2A1, 0 0 20rpx #F4C2A1, 0 0 30rpx #F4C2A1, 0 2rpx 8rpx rgba(244, 194, 161, 0.3);
+    transform: scale(1);
+  }
+  50% { 
+    text-shadow: 0 0 15rpx #F4C2A1, 0 0 30rpx #F4C2A1, 0 0 45rpx #F4C2A1, 0 0 60rpx #F4C2A1, 0 3rpx 12rpx rgba(244, 194, 161, 0.4);
+    transform: scale(1.02);
+  }
+}
+
+/* 主标题 */
+.app-slogan {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+  display: block;
+  margin-bottom: 30rpx;
+  letter-spacing: 2rpx;
+  text-shadow: 0 3rpx 12rpx rgba(0, 0, 0, 0.5);
+}
+
+/* 副标题描述 */
+.app-description {
+  font-size: 30rpx;
+  color: rgba(255, 255, 255, 0.92);
+  text-align: center;
+  line-height: 1.6;
+  padding: 0 40rpx;
+  margin-bottom: 80rpx;
+  display: block;
+  max-width: 520rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.4);
+  font-weight: 400;
+}
+
+/* 底部按钮区域 */
+.launch-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 按钮样式 */
+.launch-btn {
+  background: linear-gradient(90deg, #F4C2A1 0%, #F8D4B8 100%);
+  color: #fff;
+  border: 2rpx solid rgba(255, 255, 255, 0.3);
+  border-radius: 40rpx;
+  padding: 20rpx 60rpx;
+  font-size: 30rpx;
+  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.25), 0 2rpx 8rpx rgba(255, 255, 255, 0.2) inset;
+  width: 440rpx;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-bottom: 40rpx;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 1;
+  text-shadow: 0 1rpx 3rpx rgba(0, 0, 0, 0.3);
+}
+
+.launch-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.launch-btn:active::before {
+  left: 100%;
+}
+
+.launch-btn:active {
+  transform: scale(0.98);
+}
+
+.btn-icon {
+  margin-left: 12rpx;
+  font-size: 28rpx;
+  transition: transform 0.3s ease;
+}
+
+.launch-btn:active .btn-icon {
+  transform: translateX(4rpx);
+}
+
+/* 加载动画 */
+.loading-dots {
+  position: absolute;
+  bottom: 100rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8rpx;
+}
+
+.loading-dot {
+  width: 8rpx;
+  height: 8rpx;
+  background: #F4C2A1;
+  border-radius: 50%;
+  animation: loadingPulse 1.5s ease-in-out infinite;
+}
+
+.loading-dot:nth-child(1) { animation-delay: 0s; }
+.loading-dot:nth-child(2) { animation-delay: 0.2s; }
+.loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes loadingPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* 加载文字 */
+.loading-text {
+  position: absolute;
+  bottom: 60rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+  animation: loadingTextFade 2s ease-in-out infinite;
+}
+
+@keyframes loadingTextFade {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+} 

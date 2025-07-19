@@ -1,0 +1,60 @@
+{
+  "name": "plzme-miniprogram",
+  "version": "1.0.0",
+  "description": "PlzMe - AI互动心理剧小程序",
+  "main": "app.js",
+  "scripts": {
+    "start": "node scripts/dev.js",
+    "dev": "node scripts/dev.js",
+    "server": "node gpt-proxy.js",
+    "dev:server": "nodemon gpt-proxy.js",
+    "test:deepseek": "node test-deepseek.js",
+    "build": "npm run build:prod",
+    "build:dev": "miniprogram-ci build --mode dev",
+    "build:prod": "miniprogram-ci build --mode prod",
+    "preview": "miniprogram-ci preview",
+    "upload": "miniprogram-ci upload",
+    "lint": "eslint miniprogram --ext .js",
+    "lint:fix": "eslint miniprogram --ext .js --fix"
+  },
+  "keywords": [
+    "miniprogram",
+    "wechat",
+    "ai",
+    "psychology",
+    "therapy",
+    "drama"
+  ],
+  "author": "PlzMe Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.45.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "miniprogram-ci": "^1.8.33",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@vant/weapp": "^1.11.5",
+    "axios": "^1.9.0",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "dayjs": "^1.11.9",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "lodash": "^4.17.21",
+    "nodejieba": "^3.4.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/plzme/plzme-miniprogram.git"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}

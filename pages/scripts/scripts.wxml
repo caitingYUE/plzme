@@ -1,0 +1,262 @@
+<!--pages/scripts/scripts.wxml-->
+<view class="scripts-page page-container">
+  <!-- 精选剧本 -->
+  <view class="category-section">
+    <view class="category-header">
+      <text class="category-title">精选剧本</text>
+      <text class="more-btn" bindtap="viewMore" data-category="featured">更多</text>
+    </view>
+    
+    <scroll-view class="horizontal-scroll" scroll-x enable-flex>
+      <view class="featured-cards">
+        <view 
+          class="featured-card"
+          wx:for="{{featuredScripts}}" 
+          wx:key="id"
+          bindtap="goToScript"
+          data-id="{{item.id}}"
+        >
+          <view class="featured-image-container">
+            <image src="{{item.cover}}" class="featured-image" mode="aspectFill" />
+            <view class="featured-overlay">
+              <text class="featured-title">{{item.title}}</text>
+              <text class="featured-desc">{{item.description}}</text>
+              <view class="featured-stats">
+                <text class="featured-rating">⭐ {{item.rating}}</text>
+                <text class="featured-count">{{item.playCount}}人体验</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 新增剧本 -->
+  <view class="category-section">
+    <view class="category-header">
+      <text class="category-title">新增剧本</text>
+      <text class="more-btn" bindtap="viewMore" data-category="new">更多</text>
+    </view>
+    
+    <scroll-view class="horizontal-scroll" scroll-x enable-flex>
+      <view class="script-cards">
+        <view 
+          class="script-card"
+          wx:for="{{newScripts}}" 
+          wx:key="id"
+          bindtap="goToScript"
+          data-id="{{item.id}}"
+        >
+          <view class="script-image-container">
+            <image src="{{item.cover}}" class="script-image" mode="aspectFill" />
+            <!-- 新品标识 -->
+            <view class="new-badge">新</view>
+          </view>
+          <view class="script-info">
+            <text class="script-title">{{item.title}}</text>
+            <text class="script-desc">{{item.description}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 我们是什么关系 -->
+  <view class="category-section" wx:if="{{relationshipScripts.length > 0}}">
+    <view class="category-header">
+      <text class="category-title">我们是什么关系</text>
+      <text class="more-btn" bindtap="viewMore" data-category="relationship">更多</text>
+    </view>
+    
+    <scroll-view class="horizontal-scroll" scroll-x enable-flex>
+      <view class="script-cards">
+        <view 
+          class="script-card"
+          wx:for="{{relationshipScripts}}" 
+          wx:key="id"
+          bindtap="goToScript"
+          data-id="{{item.id}}"
+        >
+          <view class="script-image-container">
+            <image src="{{item.cover}}" class="script-image" mode="aspectFill" />
+          </view>
+          <view class="script-info">
+            <text class="script-title">{{item.title}}</text>
+            <text class="script-desc">{{item.description}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 朦胧的情愫 -->
+  <view class="category-section" wx:if="{{crushScripts.length > 0}}">
+    <view class="category-header">
+      <text class="category-title">朦胧的情愫</text>
+      <text class="more-btn" bindtap="viewMore" data-category="crush">更多</text>
+    </view>
+    
+    <scroll-view class="horizontal-scroll" scroll-x enable-flex>
+      <view class="script-cards">
+        <view 
+          class="script-card"
+          wx:for="{{crushScripts}}" 
+          wx:key="id"
+          bindtap="goToScript"
+          data-id="{{item.id}}"
+        >
+          <view class="script-image-container">
+            <image src="{{item.cover}}" class="script-image" mode="aspectFill" />
+          </view>
+          <view class="script-info">
+            <text class="script-title">{{item.title}}</text>
+            <text class="script-desc">{{item.description}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 不能说的秘密 -->
+  <view class="category-section" wx:if="{{secretScripts.length > 0}}">
+    <view class="category-header">
+      <text class="category-title">不能说的秘密</text>
+      <text class="more-btn" bindtap="viewMore" data-category="secret">更多</text>
+    </view>
+    
+    <scroll-view class="horizontal-scroll" scroll-x enable-flex>
+      <view class="script-cards">
+        <view 
+          class="script-card"
+          wx:for="{{secretScripts}}" 
+          wx:key="id"
+          bindtap="goToScript"
+          data-id="{{item.id}}"
+        >
+          <view class="script-image-container">
+            <image src="{{item.cover}}" class="script-image" mode="aspectFill" />
+          </view>
+          <view class="script-info">
+            <text class="script-title">{{item.title}}</text>
+            <text class="script-desc">{{item.description}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 心跳的声音 -->
+  <view class="category-section" wx:if="{{heartbeatScripts.length > 0}}">
+    <view class="category-header">
+      <text class="category-title">心跳的声音</text>
+      <text class="more-btn" bindtap="viewMore" data-category="heartbeat">更多</text>
+    </view>
+    
+    <scroll-view class="horizontal-scroll" scroll-x enable-flex>
+      <view class="script-cards">
+        <view 
+          class="script-card"
+          wx:for="{{heartbeatScripts}}" 
+          wx:key="id"
+          bindtap="goToScript"
+          data-id="{{item.id}}"
+        >
+          <view class="script-image-container">
+            <image src="{{item.cover}}" class="script-image" mode="aspectFill" />
+          </view>
+          <view class="script-info">
+            <text class="script-title">{{item.title}}</text>
+            <text class="script-desc">{{item.description}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{allScripts.length === 0 && !loading}}">
+    <view class="empty-icon">📚</view>
+    <view class="empty-text">暂无剧本</view>
+    <view class="empty-desc">稍后再来看看吧</view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 浮动添加按钮 -->
+  <view class="floating-add-btn" bindtap="goToCreateScript">
+    <text class="add-icon">+</text>
+  </view>
+</view>
+
+<!-- 筛选弹窗 -->
+<view class="filter-modal {{showFilterModal ? 'show' : ''}}" bindtap="hideFilter">
+  <view class="filter-content" catchtap="preventClose">
+    <view class="filter-header">
+      <text class="filter-title">筛选条件</text>
+      <text class="filter-close" bindtap="hideFilter">✕</text>
+    </view>
+    
+    <view class="filter-body">
+      <!-- 类型筛选 -->
+      <view class="filter-group">
+        <view class="group-title">剧本类型</view>
+        <view class="option-list">
+          <view 
+            class="option-item {{filterOptions.type === item.key ? 'selected' : ''}}"
+            wx:for="{{typeOptions}}" 
+            wx:key="key"
+            bindtap="selectFilter"
+            data-type="type"
+            data-value="{{item.key}}"
+          >
+            {{item.label}}
+          </view>
+        </view>
+      </view>
+
+      <!-- 情感主题筛选 -->
+      <view class="filter-group">
+        <view class="group-title">情感主题</view>
+        <view class="option-list">
+          <view 
+            class="option-item {{filterOptions.emotion === item.key ? 'selected' : ''}}"
+            wx:for="{{emotionOptions}}" 
+            wx:key="key"
+            bindtap="selectFilter"
+            data-type="emotion"
+            data-value="{{item.key}}"
+          >
+            {{item.label}}
+          </view>
+        </view>
+      </view>
+
+      <!-- 难度筛选 -->
+      <view class="filter-group">
+        <view class="group-title">情感深度</view>
+        <view class="option-list">
+          <view 
+            class="option-item {{filterOptions.difficulty === item.key ? 'selected' : ''}}"
+            wx:for="{{difficultyOptions}}" 
+            wx:key="key"
+            bindtap="selectFilter"
+            data-type="difficulty"
+            data-value="{{item.key}}"
+          >
+            {{item.label}}
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="filter-footer">
+      <button class="btn btn-secondary" bindtap="resetFilter">重置</button>
+      <button class="btn btn-primary" bindtap="applyFilter">确定</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,109 @@
+<!--首页 - PlzMe: 我是我的人生主角-->
+<view class="index-page page-container">
+  <!-- 顶部问候区域 -->
+  <view class="greeting-section">
+    <view class="user-status" wx:if="{{userInfo.name}}">
+      <text class="user-name">{{userInfo.name}}</text>
+      <text class="user-level">{{userInfo.level}}</text>
+    </view>
+  </view>
+
+  <!-- 疗愈卡片区域 -->
+  <view class="healing-section">
+    <view class="section-header">
+      <text class="section-title">下午好</text>
+      <text class="section-subtitle">内心的力量，源于深度的自我觉察</text>
+    </view>
+    
+    <scroll-view class="healing-cards" scroll-x="true" show-scrollbar="false">
+      <view class="card-container">
+      <view class="card card-hover healing-card" bindtap="viewEmotionCard">
+        <image src="/assets/index/emotion_card.png" class="card-image" mode="aspectFill"></image>
+        <view class="card-overlay">
+          <view class="card-content">
+            <text class="card-title">情绪探索卡</text>
+            <text class="card-desc">了解你的情绪密码</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="card card-hover healing-card" bindtap="viewRelationCard">
+        <image src="/assets/index/relation_card.png" class="card-image" mode="aspectFill"></image>
+        <view class="card-overlay">
+          <view class="card-content">
+            <text class="card-title">关系洞察卡</text>
+            <text class="card-desc">探索人际关系奥秘</text>
+          </view>
+        </view>
+        </view>
+        
+        <view class="card card-hover healing-card" bindtap="viewEmotionCard">
+          <image src="/assets/index/emotion_card.png" class="card-image" mode="aspectFill"></image>
+          <view class="card-overlay">
+            <view class="card-content">
+              <text class="card-title">内在觉察卡</text>
+              <text class="card-desc">发现内心的声音</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- AI情感导师入口 -->
+  <view class="ai-mentor-section">
+    <view class="section-header">
+      <text class="section-title">情感导师</text>
+    </view>
+    <view class="card card-hover ai-mentor-card" bindtap="goToAIMentor">
+      <view class="mentor-content">
+        <view class="mentor-avatar">
+          <image src="/assets/user/avatar.png" class="avatar avatar-large" mode="aspectFill"></image>
+        </view>
+        <view class="mentor-info">
+          <view class="mentor-title">AI情感导师</view>
+          <view class="mentor-subtitle">24小时在线陪伴</view>
+          <view class="mentor-desc">专业情感支持，随时为你答疑解惑</view>
+        </view>
+        <view class="mentor-arrow">→</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 线下活动区域 -->
+  <view class="activity-section">
+    <view class="section-header">
+      <text class="section-title">精选活动</text>
+      <text class="more-btn" bindtap="viewAllActivities">更多</text>
+    </view>
+    
+    <view class="activity-list">
+      <view class="activity-item card card-hover" wx:for="{{activities}}" wx:key="id" bindtap="goToActivity" data-id="{{item.id}}">
+        <image src="{{item.coverImage}}" class="activity-image" mode="aspectFill"></image>
+        <view class="activity-content">
+          <view class="activity-title">{{item.title}}</view>
+          <view class="activity-meta">
+            <view class="activity-time">
+              <text class="meta-icon">📅</text>
+              <text class="meta-text">{{item.date}}</text>
+            </view>
+            <view class="activity-location">
+              <text class="meta-icon">📍</text>
+              <text class="meta-text">{{item.location}}</text>
+            </view>
+          </view>
+          <view class="activity-participants">
+            <text class="participants-text">{{item.participants}}/{{item.maxParticipants}}人参与</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 开始探索按钮 -->
+  <view class="start-section">
+    <button class="btn btn-primary start-btn" bindtap="startExploring">
+      <text class="btn-text">开始心理剧体验</text>
+    </button>
+  </view>
+</view> 

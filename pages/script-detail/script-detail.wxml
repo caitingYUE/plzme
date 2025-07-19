@@ -1,0 +1,136 @@
+<!--pages/script-detail/script-detail.wxml-->
+<view class="script-detail-page page-container">
+  <!-- 加载状态 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 剧本内容 -->
+  <view wx:elif="{{scriptData}}">
+    <!-- 剧本封面区域 -->
+    <view class="script-cover">
+      <image src="{{scriptData.coverImage}}" class="cover-image" mode="aspectFill"></image>
+      <!-- 人群标签（覆盖在图片右下角） -->
+      <view class="script-type-badge" wx:if="{{scriptData.tags && scriptData.tags.length > 0}}">
+        <text class="script-type-text">{{scriptData.tags[0]}}</text>
+      </view>
+      <view class="cover-overlay">
+        <view class="script-info">
+          <view class="script-title">{{scriptData.title}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 剧本简介 -->
+    <view class="script-content">
+      <view class="section">
+        <view class="section-title">剧本简介</view>
+        <view class="section-content">
+          <text class="description">{{scriptData.description}}</text>
+        </view>
+      </view>
+
+      <!-- 情感标签（跳过第一个人群标签，最多显示3个） -->
+      <view class="section" wx:if="{{scriptData.tags && scriptData.tags.length > 1}}">
+        <view class="section-title">情感探索</view>
+        <view class="emotion-tags">
+          <view 
+            class="emotion-tag" 
+            wx:for="{{scriptData.tags}}" 
+            wx:for-index="tagIndex"
+            wx:key="*this"
+            wx:if="{{tagIndex > 0 && tagIndex <= 3}}"
+          >
+            {{item}}
+          </view>
+        </view>
+      </view>
+
+      <!-- 角色设定 -->
+      <view class="section">
+        <view class="section-title">角色设定</view>
+        <view class="role-info">
+          <view class="role-item">
+            <view class="role-name">你的角色</view>
+            <view class="role-desc">{{scriptData.userRole}}</view>
+          </view>
+          <view class="role-item">
+            <view class="role-name">AI角色</view>
+            <view class="role-desc">{{scriptData.aiRole}}</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 预期收获 -->
+      <view class="section" wx:if="{{scriptData.benefits && scriptData.benefits.length > 0}}">
+        <view class="section-title">预期收获</view>
+        <view class="benefits">
+          <view 
+            class="benefit-item" 
+            wx:for="{{scriptData.benefits}}" 
+            wx:key="*this"
+          >
+            <text class="benefit-icon">✨</text>
+            <text class="benefit-text">{{item}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 场景列表 -->
+      <view class="section" wx:if="{{scriptData.scenes && scriptData.scenes.length > 0}}">
+        <view class="section-title">场景</view>
+        <view class="scenes-list">
+          <view 
+            class="scene-item" 
+            wx:for="{{scriptData.scenes}}" 
+            wx:key="name"
+          >
+            <view class="scene-header">
+              <text class="scene-title">{{index + 1}}. {{item.name}}</text>
+              <text class="scene-time" wx:if="{{item.time}}">{{item.time}}</text>
+            </view>
+            <text class="scene-desc">{{item.description}}</text>
+            <view class="scene-details" wx:if="{{item.location || item.action}}">
+              <text class="scene-location" wx:if="{{item.location}}">📍 {{item.location}}</text>
+              <text class="scene-action" wx:if="{{item.action}}">🎬 {{item.action}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 底部安全间距 -->
+      <view class="bottom-safe-area"></view>
+    </view>
+
+    <!-- 固定底部操作区 -->
+    <view class="fixed-action-section">
+      <view class="action-buttons">
+        <!-- 仅自定义剧本显示投稿和开始体验按钮，无收藏按钮 -->
+        <block wx:if="{{isCustomScript}}">
+          <button class="btn btn-outline submit-btn" bindtap="submitScript">
+            <text class="btn-icon">📮</text>
+            <text class="btn-text">投稿</text>
+          </button>
+          <button class="btn btn-primary start-btn" bindtap="startScript">
+            <text class="btn-text">开始体验</text>
+          </button>
+        </block>
+        <!-- 非自定义剧本显示原有按钮 -->
+        <block wx:else>
+          <button class="btn btn-secondary collect-btn" bindtap="toggleCollect">
+            <text class="btn-icon">{{isCollected ? '♥' : '♡'}}</text>
+            <text class="btn-text">{{isCollected ? '已收藏' : '收藏'}}</text>
+          </button>
+          <button class="btn btn-primary start-btn" bindtap="startScript">
+            <text class="btn-text">开始体验</text>
+          </button>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 错误状态 -->
+  <view class="error-container" wx:else>
+    <text>数据加载失败，请重试</text>
+  </view>
+</view>

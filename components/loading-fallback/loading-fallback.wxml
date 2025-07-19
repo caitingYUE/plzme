@@ -1,0 +1,45 @@
+<view class="loading-fallback">
+  <!-- 背景装饰 -->
+  <view class="fallback-bg-decoration">
+    <view class="fallback-circle fallback-circle-1"></view>
+    <view class="fallback-circle fallback-circle-2"></view>
+    <view class="fallback-circle fallback-circle-3"></view>
+  </view>
+
+  <!-- 主要内容 -->
+  <view class="fallback-content">
+    <!-- Logo区域 -->
+    <view class="fallback-logo-section">
+      <text class="fallback-logo">PlzMe</text>
+      <text class="fallback-subtitle">{{loadingText || '加载中...'}}</text>
+    </view>
+
+    <!-- 加载动画 -->
+    <view class="fallback-loading">
+      <view class="fallback-spinner">
+        <view class="fallback-dot"></view>
+        <view class="fallback-dot"></view>
+        <view class="fallback-dot"></view>
+        <view class="fallback-dot"></view>
+        <view class="fallback-dot"></view>
+        <view class="fallback-dot"></view>
+        <view class="fallback-dot"></view>
+        <view class="fallback-dot"></view>
+      </view>
+      <text class="fallback-loading-text">{{progressText || '请稍候，正在为您准备内容'}}</text>
+    </view>
+
+    <!-- 进度条 -->
+    <view class="fallback-progress" wx:if="{{showProgress}}">
+      <view class="fallback-progress-bar">
+        <view class="fallback-progress-fill" style="width: {{progress || internalProgress || 0}}%"></view>
+      </view>
+      <text class="fallback-progress-text">{{progress || internalProgress || 0}}%</text>
+    </view>
+  </view>
+
+  <!-- 底部提示 -->
+  <view class="fallback-footer">
+    <text class="fallback-tip">{{footerText || '网络较慢时请耐心等待'}}</text>
+  </view>
+</view> 

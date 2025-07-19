@@ -1,0 +1,37 @@
+<view class="launch-container page-container">
+  <!-- 背景装饰 -->
+  <view class="bg-decoration">
+    <view class="bg-circle bg-circle-1"></view>
+    <view class="bg-circle bg-circle-2"></view>
+    <view class="bg-circle bg-circle-3"></view>
+  </view>
+
+  <!-- 主要内容 -->
+  <view class="launch-content">
+    <!-- Logo区域 -->
+    <view class="logo-section">
+      <text class="app-logo">PlzMe</text>
+      <text class="app-slogan">我是我的人生主角</text>
+      <text class="app-description">通过AI心理剧探索内心世界，在角色扮演中获得成长与疗愈</text>
+    </view>
+
+    <!-- 底部按钮 -->
+    <view class="launch-actions">
+      <button class="launch-btn" bindtap="enterApp">
+        <text>开启疗愈之旅</text>
+        <text class="btn-icon">→</text>
+      </button>
+      <!-- 已移除底部提示文字 -->
+    </view>
+  </view>
+
+  <!-- 进度指示器 -->
+  <view class="loading-dots" wx:if="{{isLoading}}">
+    <view class="loading-dot"></view>
+    <view class="loading-dot"></view>
+    <view class="loading-dot"></view>
+  </view>
+  
+  <!-- 加载文字 -->
+  <view class="loading-text" wx:if="{{isLoading}}">正在加载...</view>
+</view> 
