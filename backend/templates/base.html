@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>DramaGen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body { background: #f6f8fa; margin: 0; padding: 0; font-family: 'Inter', Arial, sans-serif; }
+        .main-layout {
+            display: flex;
+            max-width: 95vw;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 210px;
+            background: #fff;
+            border-radius: 0 18px 18px 0;
+            box-shadow: 2px 0 12px 0 rgba(0,0,0,0.04);
+            padding: 36px 0 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+            min-height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            z-index: 10;
+        }
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-left: 24px;
+            margin-right: 24px;
+        }
+        .sidebar-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 32px;
+            margin-left: 24px;
+        }
+        .sidebar a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 1.08rem;
+            transition: background 0.2s, color 0.2s;
+            display: block;
+        }
+        .sidebar a.selected, .sidebar a:active {
+            background: #e0e7ff;
+            color: #1d4ed8;
+        }
+        .sidebar a:hover {
+            background: #f1f5fd;
+            color: #1d4ed8;
+        }
+        .container-main {
+            flex: 1;
+            background: #fff;
+            border-radius: 18px;
+            margin: 36px 0 36px 240px;
+            padding: 40px 48px 80px 48px;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.04);
+            min-width: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-layout">
+        <div class="sidebar">
+            <div class="sidebar-title">DramaGen</div>
+            <nav class="sidebar-nav">
+                <a href="/scripts" class="{% if active_nav=='list' %}selected{% endif %}">剧本列表</a>
+                <a href="/submit" class="{% if active_nav=='submit' %}selected{% endif %}">新建剧本</a>
+                {% if active_nav=='edit' %}
+                <a href="#" class="selected">编辑剧本</a>
+                {% endif %}
+            </nav>
+        </div>
+        <div class="container-main">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

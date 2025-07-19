@@ -1,0 +1,229 @@
+<!-- templates/list.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>剧本列表 - DramaGen</title>
+  <style>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f6f8fa;
+      margin: 0;
+      padding: 0;
+    }
+    .main-layout {
+      display: flex;
+      max-width: 95vw;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 210px;
+      background: #fff;
+      border-radius: 0 18px 18px 0;
+      box-shadow: 2px 0 12px 0 rgba(0,0,0,0.04);
+      padding: 36px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+      min-height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      z-index: 10;
+    }
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-left: 24px;
+      margin-right: 24px;
+    }
+    .sidebar-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #2563eb;
+      margin-bottom: 32px;
+      margin-left: 24px;
+    }
+    .sidebar a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 1.08rem;
+      transition: background 0.2s, color 0.2s;
+      display: block;
+    }
+    .sidebar a.selected, .sidebar a:active {
+      background: #e0e7ff;
+      color: #1d4ed8;
+    }
+    .sidebar a:hover {
+      background: #f1f5fd;
+      color: #1d4ed8;
+    }
+    .container {
+      flex: 1;
+      background: #fff;
+      border-radius: 18px;
+      margin: 36px 0 36px 240px;
+      padding: 40px 48px;
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,0.04);
+      min-width: 0;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0;
+      color: #22223b;
+    }
+    .blue-btn {
+      background: #2563eb;
+      color: #fff;
+      text-decoration: none;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 22px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .blue-btn:hover {
+      background: #1d4ed8;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,0.04);
+    }
+    .table-wrapper {
+      position: relative;
+      overflow: auto;
+      max-height: calc(100vh - 200px);
+      border-radius: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: #f8fafc;
+    }
+    th {
+      padding: 16px;
+      text-align: left;
+      font-weight: 600;
+      color: #4b5563;
+      border-bottom: 1px solid #e5e7eb;
+      background: #f8fafc;
+    }
+    td {
+      padding: 16px;
+      border-bottom: 1px solid #e5e7eb;
+      background: #fff;
+    }
+    tr:hover td {
+      background: #f9fafb;
+    }
+    .truncate {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+    .id-col {
+      width: 60px;
+    }
+    .title-col {
+      width: 180px;
+    }
+    .summary-col {
+      width: 400px;
+    }
+    .time-col {
+      width: 150px;
+    }
+    .action-col {
+      width: 180px;
+    }
+    .actions {
+      display: flex;
+      gap: 8px;
+    }
+    .actions a {
+      color: #2563eb;
+      text-decoration: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .actions a:hover {
+      background: #e0e7ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-layout">
+    <div class="sidebar">
+      <div class="sidebar-title">DramaGen</div>
+      <nav class="sidebar-nav">
+        <a href="/scripts" class="selected">剧本列表</a>
+        <a href="/submit">新建剧本</a>
+      </nav>
+    </div>
+    <div class="container">
+      <div class="header">
+        <h1>已生成剧本</h1>
+        <a href="/submit" class="blue-btn">新建剧本</a>
+      </div>
+      <div class="card">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th class="id-col">ID</th>
+                <th class="title-col">标题</th>
+                <th class="summary-col">简介</th>
+                <th class="time-col">保存时间</th>
+                <th class="action-col">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for s in scripts %}
+              <tr>
+                <td><span class="truncate">{{ s.id }}</span></td>
+                <td><span class="truncate" title="{{ s.title }}">{{ s.title }}</span></td>
+                <td><span class="truncate" title="{{ s.content }}">{{ s.content[:40] }}{% if s.content|length > 40 %}...{% endif %}</span></td>
+                <td>{{ s.updated_at.strftime('%Y-%m-%d %H:%M') if s.updated_at else '' }}</td>
+                <td>
+                  <div class="actions">
+                    <a href="/scripts/{{ s.id }}">编辑</a>
+                    <a href="/scripts/{{ s.id }}/upload">上传</a>
+                    <a href="/scripts/{{ s.id }}/delete" onclick="return confirm('确定要删除这个剧本吗？')">删除</a>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!-- templates/detail.html -->
+{% extends "base.html" %}
+{% block content %}
+<form method="POST" action="/scripts/{{ script.id }}/edit" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label class="form-label">标题</label>
+        <input type="text" class="form-control" name="title" value="{{ script.title }}" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">标签</label>
+        <input type="text" class="form-control" name="tag" value="{{ script.tags }}">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">原始内容</label>
+        <textarea class="form-control" name="content" rows="4">{{ script.content }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">剧本配图</label><br>
+        <img id="image-preview" src="{{ script.display_image_url }}" style="max-width:300px;max-height:200px;display:block;margin-bottom:10px;{% if not script.image_url %}display:none;{% endif %}">
+        <input type="file" name="image" accept="image/*" id="image-input">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">AI生成的剧本结构（可编辑）</label>
+        <textarea class="form-control" name="result_json" rows="12">{{ script.result_json }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">保存修改</button>
+</form>
+<script>
+document.getElementById('image-input').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const preview = document.getElementById('image-preview');
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+            preview.src = evt.target.result;
+            preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+});
+</script>
+<hr>
+<h4>剧本结构解析</h4>
+<div class="mb-4">
+    <div><b>剧本简介：</b>{{ script.summary }}</div>
+    <div><b>角色设定：</b>
+        <ul>
+        {% for role in script.roles %}
+            <li>{{ role.name }}（{{ role.personality }}）</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div><b>AI分场景内容：</b>
+        {% for scene in script.scripts %}
+        <div style="margin-bottom:12px;">
+            <b>场景{{ loop.index }}：</b>{{ scene.scene }}<br>
+            <b>对话：</b>
+            <ul>
+            {% for line in scene.dialogue %}
+                <li>{{ line }}</li>
+            {% endfor %}
+            </ul>
+            <b>互动选项：</b>
+            <ul>
+            {% for choice in scene.choices %}
+                <li>{{ choice.option }}<br>角色回复：{{ choice.reply }}<br>结果：{{ choice.result }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+    <div><b>暗恋对象的内心独白：</b>{{ script.inner_monologue }}</div>
+    <div><b>关系发展分析报告：</b>
+        {% if script.final_report %}
+            <ul>
+            {% for path, report in script.final_report.items() %}
+                <li>路径{{ path }}：{{ report }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}无{% endif %}
+    </div>
+</div>
+{% endblock %}
